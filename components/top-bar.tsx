@@ -23,7 +23,7 @@ export default function TopBar() {
 				}}
 			>
 				<Pill
-					size={16}
+					size={32}
 					color={Colors[colorScheme].tint}
 					style={{
 						backgroundColor: Colors[colorScheme].iconBackground,

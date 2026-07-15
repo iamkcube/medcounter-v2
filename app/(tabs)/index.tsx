@@ -1,10 +1,11 @@
 import KPICard from "@/components/ui/kpi-card";
+import MedicineCard from "@/components/ui/medicine-card";
 import { Box, LogOut } from "lucide-react-native";
-import { FlatList, ScrollView, StyleSheet, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, View, Text } from "react-native";
 
 export default function HomeScreen() {
 	return (
-		<ScrollView
+		<View
 			style={{
 				padding: 16,
 			}}
@@ -15,10 +16,10 @@ export default function HomeScreen() {
 				renderItem={({ item }) => <KPICard {...item} />}
 			/>
 			<FlatList
-				data={kpiCards}
-				renderItem={({ item }) => <KPICard {...item} />}
+				data={medicines}
+				renderItem={({ item }) => <MedicineCard {...item} />}
 			/>
-		</ScrollView>
+		</View>
 	);
 }
 
@@ -53,7 +54,6 @@ const medicines = [
 		remainingTablets: 20,
 		totalTablets: 257,
 		daysLeft: 20,
-		percentageRemaining: 8,
 		dosage: "8:00 AM Once daily",
 		finishDate: "Aug 2",
 	},
@@ -64,7 +64,6 @@ const medicines = [
 		remainingTablets: 33,
 		totalTablets: 103,
 		daysLeft: 33,
-		percentageRemaining: 32,
 		dosage: "8:00 AM Once daily",
 		finishDate: "Aug 15",
 	},

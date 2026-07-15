@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/themed-text";
-import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme.web";
+import { Pill } from "lucide-react-native";
 import { View } from "react-native";
 
 interface MedicineCardProps {
@@ -9,7 +9,6 @@ interface MedicineCardProps {
 	remainingTablets: number;
 	totalTablets: number;
 	daysLeft: number;
-	percentageRemaining: number;
 	dosage: string;
 	finishDate: string;
 }
@@ -20,37 +19,35 @@ export default function MedicineCard({
 	remainingTablets,
 	totalTablets,
 	daysLeft,
-	percentageRemaining,
 	dosage,
 	finishDate,
 }: MedicineCardProps) {
 	const colorScheme = useColorScheme() ?? "light";
 
 	return (
-		<View
-			style={{
-				flex: 1,
-				margin: 4,
-				borderWidth: 1,
-				borderColor: Colors[colorScheme].icon,
-				borderRadius: 8,
-				padding: 16,
-				gap: 2,
-				alignItems: "center",
-				justifyContent: "center",
-			}}
-		>
-			<ThemedText>{name}</ThemedText>
-			<ThemedText
-				style={{
-					textTransform: "uppercase",
-					fontSize: 12,
-					lineHeight: 12,
-					color: Colors[colorScheme].icon,
-				}}
-			>
-				{title}
+		<View className="flex m-1 p-4 gap-0.5 bg-[#121212] border border-1 border-[#333] rounded-xl">
+			<View className="flex flex-row gap-1">
+				<Pill
+					size={32}
+					className="bg-blue-600/10 text-blue-600 border border-blue-600/30 p-1.5 rounded-lg aspect-square items-center justify-center"
+				/>
+				<View className="flex gap-1">
+					<ThemedText className="text-lg text-white font-bold">
+						{name}
+					</ThemedText>
+					<ThemedText className="text-sm text-blue-200">
+						{strength}
+					</ThemedText>
+				</View>
+			</View>
+			<ThemedText>{remainingTablets}</ThemedText>
+			<ThemedText>{totalTablets}</ThemedText>
+			<ThemedText>{daysLeft}</ThemedText>
+			<ThemedText>
+				{((daysLeft * 100) / totalTablets).toFixed(0)}%
 			</ThemedText>
+			<ThemedText>{dosage}</ThemedText>
+			<ThemedText>{finishDate}</ThemedText>
 		</View>
 	);
 }
