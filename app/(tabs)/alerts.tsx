@@ -1,112 +1,95 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { ThemedText } from "@/components/themed-text";
+import {
+  NotificationCard,
+  type Notification,
+} from "@/components/ui/notification-card";
+import { CheckCheck } from "lucide-react-native";
+import { FlatList, Pressable, View } from "react-native";
 
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
-
-export default function TabTwoScreen() {
+export default function AlertScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.regular,
-          }}>
-          Explore
+    <View className="flex-1 bg-background">
+      <View className="flex flex-row items-center gap-2 px-4 py-2">
+        <ThemedText className="text-lg font-sans-bold text-foreground">
+          Notifications
         </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
+        <ThemedText className="bg-muted px-2 py-0.5 text-sm rounded-full text-muted-foreground">
+          {notifications.length}
         </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.regular }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+        <Pressable className="ml-auto flex flex-row gap-1">
+          <CheckCheck className="text-muted-foreground" size={16} />
+          <ThemedText className="text-muted-foreground">
+            Mark all read
+          </ThemedText>
+        </Pressable>
+      </View>
+      <FlatList
+        data={notifications}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <NotificationCard {...item} />}
+        contentContainerStyle={{
+          padding: 16,
+          paddingBottom: 32,
+        }}
+        ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
+      />
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+const notifications: Notification[] = [
+  {
+    id: "notif_1784775756852_rybv5",
+    notificationHeading: "Bisoprolol",
+    notificationText: "Only 6 left - refill today!",
+    notificationDateTime: "2026-07-23T03:02:36.852Z",
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  {
+    id: "notif_1784713366173_pnsi7",
+    notificationHeading: "Metmorfin",
+    notificationText: "Only 0 left - refill today!",
+    notificationDateTime: "2026-07-22T09:42:46.173Z",
   },
-});
+  {
+    id: "notif_1784713366173_fx4c1",
+    notificationHeading: "Bisprolol",
+    notificationText: "Only 0 left - refill today!",
+    notificationDateTime: "2026-07-22T09:42:46.173Z",
+  },
+  {
+    id: "notif_1784713366173_9rmfb",
+    notificationHeading: "Saccubitril",
+    notificationText: "Only 0 left - refill today!",
+    notificationDateTime: "2026-07-22T09:42:46.173Z",
+  },
+  {
+    id: "notif_1784638332041_cjobj",
+    notificationHeading: "Planep",
+    notificationText: "Only 0 left - refill today!",
+    notificationDateTime: "2026-07-21T12:52:12.041Z",
+  },
+  {
+    id: "notif_1772016282322_69o9u",
+    notificationHeading: "Saccubitril",
+    notificationText: "Only 2 left - refill today!",
+    notificationDateTime: "2026-02-25T10:44:42.322Z",
+  },
+  {
+    id: "notif_1772016273177_binra",
+    notificationHeading: "Planep",
+    notificationText: "5 tablets remaining. Time to refill soon.",
+    notificationDateTime: "2026-02-25T10:44:33.177Z",
+  },
+  {
+    id: "notif_1772016273177_binrsa",
+    notificationHeading: "Planep",
+    notificationText: "5 tablets remaining. Time to refill soon.",
+    notificationDateTime: "2026-02-25T10:44:33.177Z",
+  },
+  {
+    id: "notif_1772016263474_1tact",
+    notificationHeading: "Metmorfin",
+    notificationText: "44 tablets remaining. Time to refill soon.",
+    notificationDateTime: "2026-02-25T10:44:23.474Z",
+  },
+];

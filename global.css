@@ -1,6 +1,88 @@
-
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css";
 
 @import "nativewind/theme";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-border: var(--border);
+
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Fonts */
+  --font-sans-thin: "DMSans_100Thin";
+  --font-sans-extralight: "DMSans_200ExtraLight";
+  --font-sans-light: "DMSans_300Light";
+  --font-sans-regular: "DMSans_400Regular";
+  --font-sans-medium: "DMSans_500Medium";
+  --font-sans-semibold: "DMSans_600SemiBold";
+  --font-sans-bold: "DMSans_700Bold";
+  --font-sans-extrabold: "DMSans_800ExtraBold";
+  --font-sans-black: "DMSans_900Black";
+
+  /* Default font */
+  --font-sans: var(--font-sans-regular);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+
+  --primary: #6cca8e;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f3f4f6;
+  --secondary-foreground: #111827;
+
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+
+  --destructive: #EF4444;
+  --destructive-foreground: #ffffff;
+
+  --card: #ffffff;
+  --card-foreground: #111827;
+
+  --border: #e5e7eb;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+
+  --primary: #22b662;
+  --primary-foreground: #ffffff;
+
+  --secondary: #18181b;
+  --secondary-foreground: #fafafa;
+
+  --muted: #27272a;
+  --muted-foreground: #888;
+
+  --destructive: #ff0000;
+  --destructive-foreground: #f8fafc;
+
+  --card: #121212;
+  --card-foreground: #fafafa;
+
+  --border: #27272a;
+}

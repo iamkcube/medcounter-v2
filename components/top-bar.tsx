@@ -1,105 +1,49 @@
+import { ThemeToggle } from "@/components/theme-toggle";
 import { ThemedText } from "@/components/themed-text";
-import { Colors, Fonts } from "@/constants/theme";
+import { palette } from "@/constants/palette";
+import { useTheme } from "@/lib/theme/ThemeProvider";
 import { Dot, LogOut, Pill } from "lucide-react-native";
-import { TouchableHighlight, useColorScheme, View } from "react-native";
+import { Pressable, View } from "react-native";
 
 export default function TopBar() {
-	const colorScheme = useColorScheme() ?? "light";
+  const { resolvedTheme } = useTheme();
+  const colors = palette[resolvedTheme];
 
-	return (
-		<View
-			style={{
-				flexDirection: "row",
-				padding: 16,
-				justifyContent: "space-between",
-				alignItems: "center",
-			}}
-		>
-			<View
-				style={{
-					flexDirection: "row",
-					alignItems: "center",
-					gap: 12,
-				}}
-			>
-				<Pill
-					size={32}
-					color={Colors[colorScheme].tint}
-					style={{
-						backgroundColor: Colors[colorScheme].iconBackground,
-						padding: 8,
-						borderRadius: 8,
-						aspectRatio: 1,
-						alignItems: "center",
-						justifyContent: "center",
-					}}
-				/>
-				<View
-					style={{
-						gap: 0,
-						justifyContent: "center",
-					}}
-				>
-					<ThemedText
-						style={{
-							fontFamily: Fonts.bold,
-							fontSize: 18,
-							fontWeight: "600",
-						}}
-					>
-						MedCounter
-					</ThemedText>
-					<ThemedText
-						style={{
-							fontSize: 12,
-							lineHeight: 12,
-							fontWeight: "500",
-							color: Colors[colorScheme].icon,
-						}}
-					>
-						Smart refill tracker
-					</ThemedText>
-				</View>
-			</View>
-			<View
-				style={{
-					flexDirection: "row",
-					gap: 16,
-				}}
-			>
-				<View
-					style={{
-						flexDirection: "row",
-						paddingBlock: 4,
-						paddingInlineStart: 4,
-						paddingInlineEnd: 16,
-						backgroundColor: Colors[colorScheme].iconBackground,
-						borderRadius: 999,
-					}}
-				>
-					<Dot color={Colors[colorScheme].icon} />
-					<ThemedText
-						style={{
-							fontSize: 12,
-							color: Colors[colorScheme].tint,
-						}}
-					>
-						Synced
-					</ThemedText>
-				</View>
-				<TouchableHighlight
-					style={{
-						alignItems: "center",
-						justifyContent: "center",
-					}}
-					onPress={() => null}
-				>
-					<LogOut
-						size={18}
-						color={Colors[colorScheme].icon}
-					/>
-				</TouchableHighlight>
-			</View>
-		</View>
-	);
+  return (
+    <View className="flex flex-row p-4 justify-between items-center">
+      <View className="flex-row items-center gap-3">
+        <Pill
+          size={32}
+          color={colors.primary}
+          className="p-2 rounded-lg aspect-square items-center bg-card justify-center"
+        />
+        <View className="justify-center gap-0">
+          <ThemedText className="text-lg font-sans-semibold">
+            MedCounter
+          </ThemedText>
+          <ThemedText className="text-xs leading-3 text-foreground">
+            Smart refill tracker
+          </ThemedText>
+        </View>
+      </View>
+
+      <View className="flex-row gap-4">
+        <ThemeToggle />
+
+        <View className="flex-row py-1 pl-1 pr-4 rounded-full items-center bg-secondary">
+          <Dot color={colors.primary} />
+          <ThemedText className="text-xs text-foreground">
+            Synced
+          </ThemedText>
+        </View>
+
+        <Pressable
+          className="items-center justify-center"
+          onPress={() => null}
+        >
+          <LogOut size={18} className="text-foreground"/>
+        </Pressable>
+      </View>
+    </View>
+  );
 }

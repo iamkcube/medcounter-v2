@@ -1,7 +1,6 @@
 import { ThemedText } from "@/components/themed-text";
-import { Colors } from "@/constants/theme";
 import { LucideIcon } from "lucide-react-native";
-import { useColorScheme, View } from "react-native";
+import { View } from "react-native";
 
 interface KPICardProps {
 	icon: LucideIcon;
@@ -10,35 +9,14 @@ interface KPICardProps {
 }
 
 export default function KPICard({ icon: Icon, amount, title }: KPICardProps) {
-	const colorScheme = useColorScheme() ?? "light";
-
 	return (
-		<View
-			style={{
-				flex: 1,
-				margin: 4,
-				borderWidth: 1,
-				borderColor: Colors[colorScheme].icon,
-				borderRadius: 8,
-				padding: 16,
-				gap: 2,
-				alignItems: "center",
-				justifyContent: "center",
-			}}
-		>
+		<View className="m-1 flex-1 items-center justify-center gap-0.5 rounded-lg border border-border bg-card p-4">
 			<Icon
 				size={16}
-				color={Colors[colorScheme].text}
+				className="text-foreground"
 			/>
 			<ThemedText>{amount}</ThemedText>
-			<ThemedText
-				style={{
-					textTransform: "uppercase",
-					fontSize: 12,
-					lineHeight: 12,
-					color: Colors[colorScheme].icon,
-				}}
-			>
+			<ThemedText className="text-muted-foreground text-xs uppercase leading-3">
 				{title}
 			</ThemedText>
 		</View>
