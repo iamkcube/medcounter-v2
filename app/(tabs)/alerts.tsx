@@ -31,7 +31,7 @@ export default function AlertScreen() {
           padding: 16,
           paddingBottom: 32,
         }}
-        ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
+        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
       />
     </View>
   );

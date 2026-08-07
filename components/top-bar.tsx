@@ -30,7 +30,7 @@ export default function TopBar() {
       <View className="flex-row gap-4">
         <ThemeToggle />
 
-        <View className="flex-row py-1 pl-1 pr-4 rounded-full items-center bg-secondary">
+        <View className="hidden lg:flex flex-row py-1 pl-1 pr-4 rounded-full items-center bg-secondary">
           <Dot color={colors.primary} />
           <ThemedText className="text-xs text-foreground">
             Synced

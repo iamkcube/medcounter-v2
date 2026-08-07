@@ -27,7 +27,7 @@ export default function SettingsScreen() {
                 Get notified when medicines run low
               </ThemedText>
             </View>
-            <ThemedButton>Enable</ThemedButton>
+            <ThemedButton size="sm">Enable</ThemedButton>
           </View>
         </View>
       </View>
